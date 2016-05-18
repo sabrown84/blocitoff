@@ -10,8 +10,9 @@ source 'https://rubygems.org'
  end
 
  # #2
- group :development do
+ group :development, :test do
    gem 'sqlite3'
+   gem 'rspec-rails', '~> 3.4'
  end
 
  # Use SCSS for stylesheets
@@ -30,3 +31,5 @@ source 'https://rubygems.org'
  gem 'figaro', '1.0'
 
  gem 'devise'
+
+ gem 'factory_girl_rails'

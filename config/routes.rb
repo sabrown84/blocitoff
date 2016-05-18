@@ -6,8 +6,9 @@ Rails.application.routes.draw do
   get 'welcome/about'
 
   devise_for :users
+  resources :users, only: [:show]
 
-  root 'welcome#index'
+  root 'users#show'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
