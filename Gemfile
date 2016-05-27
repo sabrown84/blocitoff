@@ -13,6 +13,7 @@ source 'https://rubygems.org'
  group :development, :test do
    gem 'sqlite3'
    gem 'rspec-rails', '~> 3.4'
+   gem 'shoulda'
  end
 
  # Use SCSS for stylesheets

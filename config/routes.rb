@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   get 'welcome/about'
 
   devise_for :users
-  resources :users, only: [:show] do
-    resources :items, only: [:create]
+  resources :users, only: [:update, :show] do
+    resources :items, only: [:create, :show, :destroy]
   end
 
   root 'users#show'
