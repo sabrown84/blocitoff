@@ -14,14 +14,19 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html
       format.js
-    end
+
+  def index
+    @items = Item.visible_to(current_user)
   end
+
+  def new
+    @item = Item.new
+  end
+end
 
 
   def destroy
-    @user = User.find(params[:user_id])
     @item = Item.find(params[:id])
-    @item.destroy
 
     if @item.destroy
       flash[:notice] = "Item was deleted successfully."
