@@ -1,3 +1,4 @@
 <h1>Hi, <%= current_user.email %> , Welcome to Blocitoff!</h1>
 <%= render @items %>
 <%= render partial: 'items/form', locals: {user: @user} %>
+<div class='js-items-count'><%= pluralize(@user.items.count, 'item') %></div>

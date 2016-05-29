@@ -2,9 +2,21 @@ class ItemsController < ApplicationController
   respond_to :html, :js
 
   def create
-    @user = User.find(params[:user_id])
+    @item.user = current_user
     @item = current_user.items.create(item_params)
+
+    if @item.save
+      flash[:notice] = "Item saved successfully."
+    else
+      flash[:alert] = "Item failed to save."
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
+
 
   def destroy
     @user = User.find(params[:user_id])
