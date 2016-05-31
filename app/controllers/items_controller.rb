@@ -6,14 +6,15 @@ class ItemsController < ApplicationController
     @item = current_user.items.create(item_params)
 
     if @item.save
-      flash[:notice] = "Item saved successfully."
+      respond_to do |format|
+        format.html { redirect_to user_path(current_user), notice: "Item added successfully!"}
+        format.js
+      end
     else
       flash[:alert] = "Item failed to save."
+      redirect_to user_path(current_user)
     end
-
-    respond_to do |format|
-      format.html
-      format.js
+  end
 
   def index
     @items = Item.visible_to(current_user)
@@ -22,8 +23,6 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
   end
-end
-
 
   def destroy
     @item = Item.find(params[:id])
@@ -32,6 +31,11 @@ end
       flash[:notice] = "Item was deleted successfully."
     else
       flash[:alert] = "Item couldn't be deleted. Try again."
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 
