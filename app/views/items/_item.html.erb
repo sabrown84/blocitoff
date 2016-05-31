@@ -1,6 +1,6 @@
-
-<%= item.name %></br>
-
+<%# binding.pry %>
+<%= item.name %>
+<%# binding.pry %>
 <%= link_to "Delete", user_item_path({user_id: @user.id, id: item.id}), method: :delete, remote: true, class: 'glyphicon glyphicon-ok' %>
 
-<%= days_left(item) %> days left
+<%= distance_of_time_in_words(DateTime.now, item.created_at + 7.days)%> days left

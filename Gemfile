@@ -14,6 +14,8 @@ source 'https://rubygems.org'
    gem 'sqlite3'
    gem 'rspec-rails', '~> 3.4'
    gem 'shoulda'
+
+   gem 'pry'
  end
 
  # Use SCSS for stylesheets

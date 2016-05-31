@@ -1,9 +1,11 @@
 <h1>Hi, <%= current_user.email %> , Welcome to Blocitoff!</h1>
 
-<%= render partial: 'items/form', locals: {user: @user, item: Item.new} %>
+
 
 <% @user.items.each do |item| %>
 <%= render partial: 'items/item', locals: {user: @user, item: item} %>
 <% end %>
 
 <div class='js-items-count'><%= pluralize(@user.items.count, 'item') %></div>
+
+<%= render partial: 'items/form', locals: {user: @user, item: Item.new} %>
