@@ -1,4 +1,6 @@
 
 <%= item.name %></br>
 
-<%= link_to "Delete", user_item_path(current_user, item), method: :delete, remote: true, class: 'glyphicon glyphicon-ok' %>
+<%= link_to "Delete", user_item_path({user_id: @user.id, id: item.id}), method: :delete, remote: true, class: 'glyphicon glyphicon-ok' %>
+
+<%= days_left(item) %> days left
