@@ -10,13 +10,13 @@ class ItemsController < ApplicationController
   def create
     @user = current_user
     @items = @user.items
-    @item = current_user.items.create(item_params)
+    @item = current_user.items.build(item_params)
     @item.user = @user
     if @item.save
-      redirect_to @item, notice: "To-do item saved."
+      flash[:notice] = "To-do item saved."
     else
-      flash[:error] = "Error saving - Please try again."
-      render :new
+      flash.now[:alert] = "Error saving - Please try again."
+      render :create
     end
   end
 
@@ -24,8 +24,10 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     if @item.destroy
       flash[:notice] = "To-do item deleted."
+      redirect_to @item
     else
-      flash[:error] = "Error - Please try again."
+      flash.now[:alert] = "Error - Please try again."
+      render :create
     end
   end
 
