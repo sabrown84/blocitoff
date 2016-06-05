@@ -2,8 +2,10 @@ class ItemsController < ApplicationController
   respond_to :html, :js
 
   def create
-    @item.user = current_user
-    @item = current_user.items.create(item_params)
+    @user = current_user
+    @item.user = @user
+    @item = current_user.items.build(item_params)
+    @items = @user.items
 
     if @item.save
       respond_to do |format|
