@@ -1,0 +1,2 @@
+   $('.items').prepend("<%= escape_javascript(render(@item)) %>");
+   $('.items-form').html("<%= escape_javascript(render partial: 'items/form', locals: {  user: @user, item: @user.item.new }) %>");

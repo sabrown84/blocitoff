@@ -1,4 +1,23 @@
 class ItemsController < ApplicationController
+  respond_to :html, :js
+
+  def create
+    @user = current_user
+    @item.user = @user
+    @item = current_user.items.build(item_params)
+    @items = @user.items
+
+    if @item.save
+      respond_to do |format|
+        format.html { redirect_to user_path(current_user), notice: "Item added successfully!"}
+        format.js
+      end
+    else
+      flash[:alert] = "Item failed to save."
+      redirect_to user_path(current_user)
+    end
+  end
+
   def index
     @items = Item.visible_to(current_user)
   end
@@ -7,27 +26,18 @@ class ItemsController < ApplicationController
     @item = Item.new
   end
 
-  def create
-    @user = current_user
-    @items = @user.items
-    @item = current_user.items.build(item_params)
-    @item.user = @user
-    if @item.save
-      flash[:notice] = "To-do item saved."
-    else
-      flash.now[:alert] = "Error saving - Please try again."
-      render :create
-    end
-  end
-
   def destroy
     @item = Item.find(params[:id])
+
     if @item.destroy
-      flash[:notice] = "To-do item deleted."
-      redirect_to @item
+      flash[:notice] = "Item was deleted successfully."
     else
-      flash.now[:alert] = "Error - Please try again."
-      render :create
+      flash[:alert] = "Item couldn't be deleted. Try again."
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

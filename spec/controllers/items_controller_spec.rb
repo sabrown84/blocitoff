@@ -13,6 +13,11 @@ RSpec.describe ItemsController, type: :controller do
       get :create, item: {name: "This is a test"}
       expect(response).to have_http_status(:success)
     end
+
+    it "flashes success" do
+      get :create
+      expect(flash[:notice].to be_present)
+    end
   end
 
   describe "DELETE destroy" do

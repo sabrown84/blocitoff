@@ -33,4 +33,6 @@ source 'https://rubygems.org'
 
  gem 'devise'
 
+ gem 'faker'
+
  gem 'factory_girl_rails'
