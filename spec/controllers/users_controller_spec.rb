@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-
   describe "not signed in" do
     let(:factory_user) { create(:user) }
 
@@ -10,7 +9,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it "returns http success" do
-      get :show, {id: factroy_user.id}
+      get :show, id: factroy_user.id
       expect(response).to have_http_status(:success)
     end
   end

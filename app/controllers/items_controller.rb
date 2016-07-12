@@ -1,25 +1,17 @@
 class ItemsController < ApplicationController
   respond_to :html, :js
-
-  def create
-    @user = current_user
-    @item.user = @user
+  @user = current_user
+  def create # rubocop:disable AbcSize
     @item = current_user.items.build(item_params)
-    @items = @user.items
-
     if @item.save
       respond_to do |format|
-        format.html { redirect_to user_path(current_user), notice: "Item added successfully!"}
+        format.html { redirect_to user_path(current_user), notice: "Item added successfully!" }
         format.js
       end
     else
       flash[:alert] = "Item failed to save."
       redirect_to user_path(current_user)
     end
-  end
-
-  def index
-    @items = Item.visible_to(current_user)
   end
 
   def new
